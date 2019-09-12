@@ -1,0 +1,84 @@
+.App {
+  margin: auto;
+  text-align: center;
+  width: 1200px;
+}
+
+.App-logo {
+  /* animation: App-logo-spin infinite 20s linear; */
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.chess-board {
+  margin: auto;
+  pointer-events: none;
+  position: relative;
+  width: 1200px;
+}
+
+div.chess-board {
+  border: 1px solid gray;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 600px;
+  height: 600px;
+}
+
+div.chess-board > div {
+  height: 75px;
+  width: 75px;
+}
+
+div.chess-board > div.hilite {
+  background-color:green;
+}
+
+div#A8.hilite, div#C8.hilite, div#E8.hilite, div#G8.hilite,
+div#B7.hilite, div#D7.hilite, div#F7.hilite, div#H7.hilite,
+div#A6.hilite, div#C6.hilite, div#E6.hilite, div#G6.hilite,
+div#B5.hilite, div#D5.hilite, div#F5.hilite, div#H5.hilite,
+div#A4.hilite, div#C4.hilite, div#E4.hilite, div#G4.hilite,
+div#B3.hilite, div#D3.hilite, div#F3.hilite, div#H3.hilite,
+div#A2.hilite, div#C2.hilite, div#E2.hilite, div#G2.hilite,
+div#B1.hilite, div#D1.hilite, div#F1.hilite, div#H1.hilite {
+  background-color:#00ff00;
+}
+
+div#A8, div#C8, div#E8, div#G8,
+div#B7, div#D7, div#F7, div#H7,
+div#A6, div#C6, div#E6, div#G6,
+div#B5, div#D5, div#F5, div#H5,
+div#A4, div#C4, div#E4, div#G4,
+div#B3, div#D3, div#F3, div#H3,
+div#A2, div#C2, div#E2, div#G2,
+div#B1, div#D1, div#F1, div#H1 {
+  background-color:gray;
+}
+
+img.chess-piece {
+  margin: 10px;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
