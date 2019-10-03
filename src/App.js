@@ -5,6 +5,7 @@ import './App.css'
 import Piece from './Piece'
 import BlackKingImage from './images/45px-Chess_kdt45.svg.png'
 import WhiteQueenImage from './images/45px-Chess_qlt45.svg.png'
+import move from './Moves.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -34,10 +35,19 @@ class App extends React.Component {
     }
   }
 
+  hilite = () => {
+    this.state.position.forEach( (piece, i) => {
+        console.log(piece, i)
+    })
+  }
+
   componentDidMount = () => {
     this.setState({
-        cssName: this.state.cssNames[0],
         position: this.state.positions[0]
+    })
+    this.hilite()
+    this.setState({
+        cssName: this.state.cssNames[0]
     })
   }
 
@@ -56,8 +66,9 @@ class App extends React.Component {
     this.setState({
         currentPosition: newCurrentPosition,
         position: this.state.positions[newCurrentPosition],
-        cssName: this.state.cssNames[newCurrentPosition]
+        cssName: []//this.state.cssNames[newCurrentPosition]
     })
+    this.hilite()
   }
 
   render() {
