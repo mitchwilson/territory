@@ -66,7 +66,7 @@ class App extends React.Component {
     this.setState({
         currentPosition: newCurrentPosition,
         position: this.state.positions[newCurrentPosition],
-        cssName: []//this.state.cssNames[newCurrentPosition]
+        cssName: this.state.cssNames[newCurrentPosition]
     })
     this.hilite()
   }
