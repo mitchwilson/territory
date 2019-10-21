@@ -7,6 +7,7 @@ class Square extends React.Component {
     e.preventDefault()
     const data = e.dataTransfer.getData("transfer")
     e.target.appendChild(document.getElementById(data))
+    this.props.update(0, this.props.id)
   }
 
   allowDrop = (e) => {

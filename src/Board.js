@@ -60,13 +60,17 @@ class Board extends React.Component {
       default:
         break
     }
-    var kingPosition
     let position = this.state.positions[newCurrentPosition]
+    var kingPosition
     position.forEach((piece, i)=>{
       if(piece) {
         kingPosition = this.squares[i]
       }
     })
+    this.update(newCurrentPosition, kingPosition)
+  }
+
+  update(newCurrentPosition, kingPosition) {
     let kingMoves = KING_MOVES.map((move)=> {
       kingPosition = getCoordForMove(kingPosition, move)
       if(kingPosition) return kingPosition
@@ -102,7 +106,7 @@ class Board extends React.Component {
           {this.squares.map( (key, i) => {
             let piece = this.state.position[i]
             let cssName = key in this.state.hilites ? "hilite" : "" //this.state.cssName[i]
-            return <Square id={key} key={key} children={piece} cssName={cssName} />
+            return <Square id={key} key={key} children={piece} cssName={cssName} update={this.update.bind(this)} />
           })}
         </div>
         <button onClick={this.next.bind(this, '-')}>Previous</button>
