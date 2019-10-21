@@ -1,6 +1,9 @@
 import React from 'react'
 import Draggable from '../Draggable'
 import Droppable from '../Droppable'
+import Piece from '../Piece'
+import BlackKingImage from '../images/Chess_kdt60.png'
+import WhiteKingImage from '../images/Chess_klt60.png'
 
 const wrapperStyle = {
   width: "100%",
@@ -28,11 +31,10 @@ export default class DndTest extends React.Component {
     return (
       <div style={wrapperStyle}>
         <Droppable id="dr1" style={droppableStyle}>
-          <Draggable id="item1" style={{margin:'8px'}}><div style={itemStyle}>Some text</div></Draggable>
-          <Draggable id="item2" style={{margin:'8px'}}><div style={itemStyle}>More text</div></Draggable>
+          <Draggable id="item1" style={{margin:'8px'}}>{Piece(WhiteKingImage, 'White King')}</Draggable>
         </Droppable>
         <Droppable id="dr2" style={droppableStyle}>
-
+          <Draggable id="item2" style={{margin:'8px'}}>{Piece(BlackKingImage, 'Black King')}</Draggable>
         </Droppable>
       </div>
     )
