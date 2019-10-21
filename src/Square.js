@@ -1,11 +1,21 @@
-import React from 'react';
-import Droppable from './Droppable'
+import React from 'react'
+
 
 class Square extends React.Component {
 
+  drop = (e) => {
+    e.preventDefault()
+    const data = e.dataTransfer.getData("transfer")
+    e.target.appendChild(document.getElementById(data))
+  }
+
+  allowDrop = (e) => {
+    e.preventDefault()
+  }
+
   render() {
     return (
-      <Droppable id={this.props.id} className={this.props.cssName}>{this.props.piece}</Droppable>
+      <div id={this.props.id} className={this.props.cssName} onDrop={this.drop} onDragOver={this.allowDrop}>{this.props.children}</div>
     )
   }
 }

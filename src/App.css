@@ -25,7 +25,6 @@
 
 .chess-board {
   margin: auto;
-  pointer-events: none;
   position: relative;
   width: 1200px;
 }
@@ -72,6 +71,7 @@ div#B1, div#D1, div#F1, div#H1 {
 
 img.chess-piece {
   margin: 10px;
+  pointer-events: none;
 }
 
 @keyframes spin {

@@ -40,6 +40,12 @@ class Board extends React.Component {
     })
   }
 
+  hilite = () => {
+    this.state.position.forEach( (piece, i) => {
+        console.log(piece, i)
+    })
+  }
+
   next = (direction) => {
     let newCurrentPosition = this.state.currentPosition
     switch(direction) {
@@ -96,7 +102,7 @@ class Board extends React.Component {
           {this.squares.map( (key, i) => {
             let piece = this.state.position[i]
             let cssName = key in this.state.hilites ? "hilite" : "" //this.state.cssName[i]
-            return <Square id={key} key={key} piece={piece} cssName={cssName} />
+            return <Square id={key} key={key} children={piece} cssName={cssName} />
           })}
         </div>
         <button onClick={this.next.bind(this, '-')}>Previous</button>
