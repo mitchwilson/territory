@@ -10,7 +10,8 @@ class Board extends React.Component {
     this.state = {
       files: [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
       ranks: [ '8', '7', '6', '5', '4', '3', '2', '1'],
-      hilites: {}
+      hilites: {},
+      position: {}
     }
     this.squares = this.state.ranks.map( row => {
       return this.state.files.map( col => {
@@ -29,27 +30,36 @@ class Board extends React.Component {
     })
   }
 
-  update(kingPosition) {
-    let kingMoves = KING_MOVES.map((move)=> {
-      kingPosition = getCoordForMove(kingPosition, move)
-      if(kingPosition) return kingPosition
-      else return null
-    })
-    var nullIndex;
-    kingMoves.forEach((entry, i)=>{
-      if(entry === null) {
-        if(nullIndex===undefined) {
-          nullIndex = i;
-        }
+  update(kingPosition, pieceId) {
+    Object.keys(this.state.position).forEach( (key) => {
+      if(this.state.position[key] === pieceId) {
+        delete this.state.position[key]
       }
     })
-    let kingHilites = kingMoves.slice()
-    if(nullIndex) {
-      kingHilites.splice(nullIndex)
-    }
+
+    this.state.position[kingPosition] = pieceId
     let hilites = {}
-    kingHilites.forEach((square)=>{
-      hilites[square] = square
+    Object.keys(this.state.position).forEach( (key) => {
+      let kingMoves = KING_MOVES.map((move)=> {
+        key = getCoordForMove(key, move)
+        if(key) return key
+        else return null
+      })
+      var nullIndex;
+      kingMoves.forEach((entry, i)=>{
+        if(entry === null) {
+          if(nullIndex===undefined) {
+            nullIndex = i;
+          }
+        }
+      })
+      let kingHilites = kingMoves.slice()
+      if(nullIndex) {
+        kingHilites.splice(nullIndex)
+      }
+      kingHilites.forEach((square)=>{
+        hilites[square] = square
+      })
     })
     this.setState({
         hilites: hilites || {}
