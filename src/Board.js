@@ -2,6 +2,7 @@ import React from 'react'
 import Square from './Square'
 import Piece from './Piece'
 import BlackKingImage from './images/45px-Chess_kdt45.svg.png'
+import {getCoordForMove, KING_MOVES} from './Moves'
 
 class Board extends React.Component {
   constructor(props) {
@@ -12,20 +13,18 @@ class Board extends React.Component {
       files: [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
       ranks: [ '8', '7', '6', '5', '4', '3', '2', '1'],
       position: [],
-      cssNames: [
-        ['hilite', 'hilite','','','','','','','hilite','hilite'],
-        ['hilite', 'hilite','hilite','','','','','','hilite','hilite','hilite'],
-        ['', 'hilite','hilite','hilite','','','','','','hilite','hilite','hilite'],
-        ['', '','hilite','hilite','hilite','','','','','','hilite','hilite','hilite'],
-        ['', '','hilite','hilite','hilite','','','','','','hilite','hilite','hilite','','','','','','hilite','hilite','hilite']
-      ],
-      cssName: [],
+      hilites: {},
       positions: [
         [this.BlackKing],
         ['',this.BlackKing],
         ['','',this.BlackKing],
         ['','','',this.BlackKing],
-        ['','','','','','','','','','','',this.BlackKing]
+        ['','','','','','','','','','','',this.BlackKing],
+        ['','','','','','','','','','','','',this.BlackKing],
+        ['','','','','','','','','','','','','',this.BlackKing],
+        ['','','','','','','','','','','','','','','','','','','','','',this.BlackKing],
+        ['','','','','','','','','','','','','','','','','','','','','','','','','','','','','',this.BlackKing],
+        ['','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','',this.BlackKing]
       ]
     }
     this.squares = this.state.ranks.map( row => {
@@ -39,19 +38,9 @@ class Board extends React.Component {
     this.setState({
         position: this.state.positions[0]
     })
-    this.hilite()
-    this.setState({
-        cssName: this.state.cssNames[0]
-    })
   }
 
-  hilite = () => {
-    this.state.position.forEach( (piece, i) => {
-        console.log(piece, i)
-    })
-  }
-
-  next = (direction) => {console.log(direction)
+  next = (direction) => {
     let newCurrentPosition = this.state.currentPosition
     switch(direction) {
       case '+':
@@ -65,17 +54,39 @@ class Board extends React.Component {
       default:
         break
     }
+    var kingPosition
+    let position = this.state.positions[newCurrentPosition]
+    position.forEach((piece, i)=>{
+      if(piece) {
+        kingPosition = this.squares[i]
+      }
+    })
+    let kingMoves = KING_MOVES.map((move)=> {
+      kingPosition = getCoordForMove(kingPosition, move)
+      if(kingPosition) return kingPosition
+      else return null
+    })
+    var nullIndex;
+    kingMoves.forEach((entry, i)=>{
+      if(entry === null) {
+        if(nullIndex===undefined) {
+          nullIndex = i;
+        }
+      }
+    })
+    let kingHilites = kingMoves.slice()
+    if(nullIndex) {
+      kingHilites.splice(nullIndex)
+    }
+    let hilites = {}
+    kingHilites.forEach((square)=>{
+      hilites[square] = square
+    })
     this.setState({
         currentPosition: newCurrentPosition,
         position: this.state.positions[newCurrentPosition],
-        cssName: this.state.cssNames[newCurrentPosition]
+        hilites: hilites || {}
     })
-
-    this.hilite()
-  }
-
-  test() {
-    console.log('test')
   }
 
   render() {
@@ -84,8 +95,8 @@ class Board extends React.Component {
         <div className="chess-board">
           {this.squares.map( (key, i) => {
             let piece = this.state.position[i]
-            let cssName = this.state.cssName[i]
-            return <Square id={key} key={key} piece={piece} cssName={cssName}  />
+            let cssName = key in this.state.hilites ? "hilite" : "" //this.state.cssName[i]
+            return <Square id={key} key={key} piece={piece} cssName={cssName} />
           })}
         </div>
         <button onClick={this.next.bind(this, '-')}>Previous</button>
