@@ -30,13 +30,13 @@ class Board extends React.Component {
     })
   }
 
-  update(kingPosition, pieceId) {
+  update(kingPosition, pieceId) {console.log("update", pieceId)
     Object.keys(this.state.position).forEach( (key) => {
       if(this.state.position[key] === pieceId) {
         delete this.state.position[key]
       }
     })
-
+    // NOTE: DONT UPDATE STATE DIRECTLY.
     this.state.position[kingPosition] = pieceId
     let hilites = {}
     Object.keys(this.state.position).forEach( (key) => {
@@ -65,14 +65,21 @@ class Board extends React.Component {
         hilites: hilites || {}
     })
   }
-
+  remove(id) {
+    // let pos = Object.assign({}, this.state.position)
+    // delete pos.id
+    // console.log(pos)
+    // this.setState({
+    //   position: {}
+    // })
+  }
   render() {
     return (
       <div>
         <div className="chess-board">
           {this.squares.map( (key, i) => {
-            let cssName = key in this.state.hilites ? "hilite" : "" //this.state.cssName[i]
-            return <Square id={key} key={key} cssName={cssName} update={this.update.bind(this)} />
+            let cssName = key in this.state.hilites ? "hilite" : ""
+            return <Square id={key} key={key} cssName={cssName} remove={this.remove.bind(this)} update={this.update.bind(this)} />
           })}
         </div>
       </div>

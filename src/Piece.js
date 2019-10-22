@@ -1,21 +1,24 @@
 import React from 'react';
-import Draggable from './Draggable'
 
-function Piece(image, altText) {
+export default class Piece extends React.Component {
 
-  let drag = (e) => {
+  drag(e) {
     e.dataTransfer.setData("transfer", e.target.id)
   }
 
-  let noAllowDrop = (e) => {
+  dragLeave(e) {
+    console.log('dragLeave', e.target.id)
+  }
+
+  noAllowDrop(e) {
     e.stopPropagation()
   }
 
-  return (
-    <div id={altText.replace(" ", "-")} style={{border:"1px red solid", pointerEvents: "all"}} draggable="true" onDragStart={drag} onDragOver={noAllowDrop}>
-      <img src={image} alt={altText} className='chess-piece' />
-    </div>
-  )
+  render() {
+    return (
+      <div id={this.props.altText.replace(" ", "-")} draggable="true" onDragStart={this.drag} onDragOver={this.noAllowDrop} onDragLeave={this.dragLeave}>
+        <img src={this.props.image} alt={this.props.altText} className='chess-piece' />
+      </div>
+    )
+  }
 }
-
-export default Piece;

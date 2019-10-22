@@ -2,7 +2,7 @@ import React from 'react'
 import Board from './Board'
 import Header from './Header'
 import './App.css'
-import DndTest from './DndTest'
+import Bays from './Bays'
 
 class App extends React.Component {
 
@@ -11,7 +11,7 @@ class App extends React.Component {
       <div className="App">
         <Header />
         <Board />
-        <DndTest />
+        <Bays />
       </div>
     )
   }

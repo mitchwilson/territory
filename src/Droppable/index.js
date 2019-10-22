@@ -7,6 +7,7 @@ export default class Droppable extends React.Component {
     e.preventDefault()
     const data = e.dataTransfer.getData("transfer")
     e.target.appendChild(document.getElementById(data))
+    this.props.drop(e)
   }
 
   allowDrop = (e) => {
