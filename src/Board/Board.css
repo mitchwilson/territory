@@ -5,6 +5,7 @@
 }
 
 div.chess-board {
+  background-color: gray;
   border: 1px solid gray;
   display:flex;
   flex-direction: row;
@@ -41,7 +42,7 @@ div#A4, div#C4, div#E4, div#G4,
 div#B3, div#D3, div#F3, div#H3,
 div#A2, div#C2, div#E2, div#G2,
 div#B1, div#D1, div#F1, div#H1 {
-  background-color:gray;
+  background-color:white;
 }
 
 img.chess-piece {
