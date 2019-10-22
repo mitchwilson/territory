@@ -1,6 +1,19 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Territory
+
+A chess app to illustrate your chess pieces' influence and control -- your territory -- on the chess board.
+
+Supported Chess Pieces:
+
+- Black King
+- White King
+
+## Plan for the Future
+
+Will be adding all the other chess pieces.
 
 ## Available Scripts
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 In the project directory, you can run:
 
