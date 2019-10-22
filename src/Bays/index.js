@@ -1,7 +1,7 @@
 import React from 'react'
 import Draggable from '../Draggable'
 import Droppable from '../Droppable'
-import Piece from '../Piece'
+import Piece from '../Board/Piece'
 import BlackKingImage from '../images/Chess_kdt60.png'
 import WhiteKingImage from '../images/Chess_klt60.png'
 

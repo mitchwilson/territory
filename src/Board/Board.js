@@ -1,7 +1,7 @@
 import React from 'react'
 import Square from './Square'
-
 import {getCoordForMove, KING_MOVES} from './Moves'
+import './Board.css'
 
 class Board extends React.Component {
   constructor(props) {
