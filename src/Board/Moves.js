@@ -9,14 +9,20 @@ export const GO = {
 }
 
 export const KING_MOVES = [
-  GO.RIGHT,
-  GO.DOWN,
-  GO.LEFT,
-  GO.LEFT,
-  GO.UP,
-  GO.UP,
-  GO.RIGHT,
-  GO.RIGHT
+  [GO.RIGHT],
+  [GO.RIGHT, GO.DOWN],
+  [GO.DOWN],
+  [GO.DOWN, GO.LEFT],
+  [GO.LEFT],
+  [GO.RIGHT],
+  [GO.UP, GO.LEFT],
+  [GO.UP],
+  [GO.UP, GO.RIGHT],
+]
+
+export const PAWN_MOVES = [
+  [GO.UP, GO.LEFT],
+  [GO.UP, GO.RIGHT]
 ]
 
 let getCoord = (file, rank) => {
@@ -34,29 +40,33 @@ let getRankAsNumber = (coord) => {
 let getRankIndex = (rank) => {
     return ranks.indexOf(rank)
 }
-export let getCoordForMove = (coord:String, direction:String) => {
-    let fileAsString = getFileAsString(coord)
-    let fileIndex = getFileIndex(fileAsString)
-    let rankAsNumber = getRankAsNumber(coord)
-    let rankIndex = getRankIndex(rankAsNumber)
-    let newCoordString = "";
+export let getCoordForMove = (coord:String, path:Array) => {
 
-    switch(direction) {
-        case GO.UP:
-            newCoordString = getCoord(fileAsString, ranks[rankIndex + 1])
-            break;
-        case GO.DOWN:
-            newCoordString = getCoord(fileAsString, ranks[rankIndex - 1])
-            break;
-        case GO.LEFT:
-            newCoordString = getCoord(files[fileIndex - 1], rankAsNumber)
-            break;
-        case GO.RIGHT:
-            newCoordString = getCoord(files[fileIndex + 1], rankAsNumber)
-            break;
-        default:
-            newCoordString = coord
-    }
+    return path.reduce( (acc, curr, idx, arr) => {
+      let direction = curr
+      let fileAsString = getFileAsString(acc)
+      let fileIndex = getFileIndex(fileAsString)
+      let rankAsNumber = getRankAsNumber(acc)
+      let rankIndex = getRankIndex(rankAsNumber)
+      let newCoordString = "";
 
-    return newCoordString
+      switch(direction) {
+          case GO.UP:
+              newCoordString = getCoord(fileAsString, ranks[rankIndex + 1])
+              break;
+          case GO.DOWN:
+              newCoordString = getCoord(fileAsString, ranks[rankIndex - 1])
+              break;
+          case GO.LEFT:
+              newCoordString = getCoord(files[fileIndex - 1], rankAsNumber)
+              break;
+          case GO.RIGHT:
+              newCoordString = getCoord(files[fileIndex + 1], rankAsNumber)
+              break;
+          default:
+              newCoordString = acc
+      }
+      return newCoordString
+    }, coord)
+
 }

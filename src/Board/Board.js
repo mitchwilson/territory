@@ -30,7 +30,7 @@ class Board extends React.Component {
     })
   }
 
-  update(kingPosition, pieceId) {console.log("update", pieceId)
+  update(kingPosition, pieceId) {
     Object.keys(this.state.position).forEach( (key) => {
       if(this.state.position[key] === pieceId) {
         delete this.state.position[key]
@@ -40,24 +40,12 @@ class Board extends React.Component {
     this.state.position[kingPosition] = pieceId
     let hilites = {}
     Object.keys(this.state.position).forEach( (key) => {
-      let kingMoves = KING_MOVES.map((move)=> {
-        key = getCoordForMove(key, move)
-        if(key) return key
+      let kingMoves = KING_MOVES.map((path)=> {
+        let key2 = getCoordForMove(key, path)
+        if(key2) return key2
         else return null
       })
-      var nullIndex;
-      kingMoves.forEach((entry, i)=>{
-        if(entry === null) {
-          if(nullIndex===undefined) {
-            nullIndex = i;
-          }
-        }
-      })
-      let kingHilites = kingMoves.slice()
-      if(nullIndex) {
-        kingHilites.splice(nullIndex)
-      }
-      kingHilites.forEach((square)=>{
+      kingMoves.forEach((square)=>{
         hilites[square] = square
       })
     })
@@ -66,6 +54,7 @@ class Board extends React.Component {
     })
   }
   remove(id) {
+    console.log("remove")
     // let pos = Object.assign({}, this.state.position)
     // delete pos.id
     // console.log(pos)
