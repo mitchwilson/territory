@@ -2,6 +2,7 @@ import React from 'react'
 import Square from './Square'
 import Bays from '../Bays'
 import {getCoordForMove, KING_MOVES} from './Moves'
+import 'array-flat-polyfill'
 import './Board.css'
 
 class Board extends React.Component {
