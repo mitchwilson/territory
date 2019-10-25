@@ -1,5 +1,6 @@
 import React from 'react'
 import Square from './Square'
+import Bays from '../Bays'
 import {getCoordForMove, KING_MOVES} from './Moves'
 import './Board.css'
 
@@ -20,24 +21,11 @@ class Board extends React.Component {
     }).flat()
   }
 
-  componentDidMount = () => {
-
-  }
-
-  hilite = () => {
-    this.state.position.forEach( (piece, i) => {
-        console.log(piece, i)
-    })
-  }
-
   update(kingPosition, pieceId) {
-    Object.keys(this.state.position).forEach( (key) => {
-      if(this.state.position[key] === pieceId) {
-        delete this.state.position[key]
-      }
-    })
-    // NOTE: DONT UPDATE STATE DIRECTLY.
-    this.state.position[kingPosition] = pieceId
+    this.remove(pieceId)
+    let pos = Object.assign({}, this.state.position)
+    pos[kingPosition] = pieceId
+    this.state.position = pos
     let hilites = {}
     Object.keys(this.state.position).forEach( (key) => {
       let kingMoves = KING_MOVES.map((path)=> {
@@ -53,14 +41,13 @@ class Board extends React.Component {
         hilites: hilites || {}
     })
   }
-  remove(id) {
-    console.log("remove")
-    // let pos = Object.assign({}, this.state.position)
-    // delete pos.id
-    // console.log(pos)
-    // this.setState({
-    //   position: {}
-    // })
+  remove(pieceId) {
+    let state = Object.assign({}, this.state)
+    Object.keys(this.state.position).forEach( (key) => {
+      if(this.state.position[key] === pieceId) {
+        delete state.position[key]
+      }
+    })
   }
   render() {
     return (
@@ -68,9 +55,10 @@ class Board extends React.Component {
         <div className="chess-board">
           {this.squares.map( (key, i) => {
             let cssName = key in this.state.hilites ? "hilite" : ""
-            return <Square id={key} key={key} cssName={cssName} remove={this.remove.bind(this)} update={this.update.bind(this)} />
+            return <Square id={key} key={key} cssName={cssName} update={this.update.bind(this)} />
           })}
         </div>
+        <Bays update={this.update.bind(this)} />
       </div>
     )
   }

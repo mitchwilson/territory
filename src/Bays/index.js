@@ -11,13 +11,6 @@ const wrapperStyle = {
   justifyContent: "center"
 }
 
-const itemStyle = {
-  padding: "8px",
-  color: "#555",
-  backgroundColor: "white",
-  borderRadius: "3px"
-}
-
 const droppableStyle = {
   backgroundColor: '#555',
   width: '250px',
@@ -26,8 +19,8 @@ const droppableStyle = {
 }
 
 export default class Bays extends React.Component {
-  drop(e) {
-    console.log(e)
+  drop = (e) => {
+    this.props.update("", e.dataTransfer.getData('transfer'))
   }
   render() {
     return (
