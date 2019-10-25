@@ -20,7 +20,12 @@ export const KING_MOVES = [
   [GO.UP, GO.RIGHT],
 ]
 
-export const PAWN_MOVES = [
+export const BLACK_PAWN_MOVES = [
+  [GO.DOWN, GO.LEFT],
+  [GO.DOWN, GO.RIGHT]
+]
+
+export const WHITE_PAWN_MOVES = [
   [GO.UP, GO.LEFT],
   [GO.UP, GO.RIGHT]
 ]
