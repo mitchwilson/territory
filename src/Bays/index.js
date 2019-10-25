@@ -4,6 +4,7 @@ import Droppable from '../Droppable'
 import Piece from '../Board/Piece'
 import BlackKingImage from '../images/Chess_kdt60.png'
 import WhiteKingImage from '../images/Chess_klt60.png'
+import BlackPawnImage from '../images/Chess_pdt60.png'
 
 const wrapperStyle = {
   width: "100%",
@@ -20,7 +21,7 @@ const droppableStyle = {
 
 export default class Bays extends React.Component {
   drop = (e) => {
-    this.props.update("", e.dataTransfer.getData('transfer'))
+    this.props.update('', e.dataTransfer.getData('transfer'))
   }
   render() {
     return (
@@ -30,6 +31,9 @@ export default class Bays extends React.Component {
         </Droppable>
         <Droppable id="dr2" style={droppableStyle} drop={this.drop}>
           <Draggable id="item2"><Piece image={BlackKingImage} altText='Black King' /></Draggable>
+          <Draggable id="item3"><Piece image={BlackPawnImage} altText='Black Pawn 1' /></Draggable>
+          <Draggable id="item4"><Piece image={BlackPawnImage} altText='Black Pawn 2' /></Draggable>
+          <Draggable id="item5"><Piece image={BlackPawnImage} altText='Black Pawn 3' /></Draggable>
         </Droppable>
       </div>
     )

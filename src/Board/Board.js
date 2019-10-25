@@ -1,7 +1,7 @@
 import React from 'react'
 import Square from './Square'
 import Bays from '../Bays'
-import {getCoordForMove, KING_MOVES} from './Moves'
+import {getCoordForMove, KING_MOVES, PAWN_MOVES} from './Moves'
 import 'array-flat-polyfill'
 import './Board.css'
 
@@ -22,19 +22,27 @@ class Board extends React.Component {
     }).flat()
   }
 
-  update(kingPosition, pieceId) {
+  update(coord, pieceId) {
     this.remove(pieceId)
     let pos = Object.assign({}, this.state.position)
-    pos[kingPosition] = pieceId
+    pos[coord] = pieceId
     this.state.position = pos
     let hilites = {}
+    let moves = []
+
     Object.keys(this.state.position).forEach( (key) => {
-      let kingMoves = KING_MOVES.map((path)=> {
+      let thisPieceId = this.state.position[key]
+      if(thisPieceId.indexOf('King') > -1) {
+        moves = KING_MOVES
+      } else {
+        moves = PAWN_MOVES
+      }
+      let myMoves = moves.map((path)=> {
         let key2 = getCoordForMove(key, path)
         if(key2) return key2
         else return null
       })
-      kingMoves.forEach((square)=>{
+      myMoves.forEach((square)=>{
         hilites[square] = square
       })
     })
