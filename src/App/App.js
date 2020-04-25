@@ -1,6 +1,6 @@
 import React from 'react'
 import Board from '../Board/Board'
-import Header from '../Header/Header'
+import Header from './Header'
 import './App.css'
 
 class App extends React.Component {
