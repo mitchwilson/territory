@@ -2,10 +2,10 @@ import React from 'react'
 import Draggable from './Draggable'
 import Droppable from './Droppable'
 import Piece from '../Pieces/Piece'
-import BlackKingImage from '../images/Chess_kdt60.png'
-import WhiteKingImage from '../images/Chess_klt60.png'
-import BlackPawnImage from '../images/Chess_pdt60.png'
-import WhitePawnImage from '../images/Chess_plt60.png'
+import BlackKingImage from '../Pieces/Chess_kdt60.png'
+import WhiteKingImage from '../Pieces/Chess_klt60.png'
+import BlackPawnImage from '../Pieces/Chess_pdt60.png'
+import WhitePawnImage from '../Pieces/Chess_plt60.png'
 
 const wrapperStyle = {
   width: "100%",
