@@ -1,7 +1,7 @@
 import React from 'react'
 import Square from './Square'
 import Bays from '../Bays/Bays'
-import {getCoordForMove, KING_MOVES, BLACK_PAWN_MOVES, WHITE_PAWN_MOVES} from './Moves'
+import {getCoordForMove, KING_MOVES, BLACK_PAWN_MOVES, WHITE_PAWN_MOVES} from '../Pieces/Moves'
 import 'array-flat-polyfill'
 import './Board.css'
 
