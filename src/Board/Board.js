@@ -1,6 +1,6 @@
 import React from 'react'
 import Square from './Square'
-import Bays from '../Bays'
+import Bays from '../Bays/Bays'
 import {getCoordForMove, KING_MOVES, BLACK_PAWN_MOVES, WHITE_PAWN_MOVES} from './Moves'
 import 'array-flat-polyfill'
 import './Board.css'
@@ -32,6 +32,7 @@ class Board extends React.Component {
 
     Object.keys(this.state.position).forEach( (key) => {
       let thisPieceId = this.state.position[key]
+      let color = thisPieceId.indexOf('Black') > -1 ? 'black' : 'white'
       if(thisPieceId.indexOf('King') > -1) {
         moves = KING_MOVES
       } else {
@@ -47,7 +48,7 @@ class Board extends React.Component {
         else return null
       })
       myMoves.forEach((square)=>{
-        hilites[square] = square
+        hilites[square] = color
       })
     })
     this.setState({
@@ -68,7 +69,8 @@ class Board extends React.Component {
         <div className="chess-board">
           {this.squares.map( (key, i) => {
             let cssName = key in this.state.hilites ? "hilite" : ""
-            return <Square id={key} key={key} cssName={cssName} update={this.update.bind(this)} />
+            let hiliteColor = this.state.hilites[key] || ""
+            return <Square id={key} key={key} cssName={cssName + ' ' + hiliteColor} update={this.update.bind(this)} />
           })}
         </div>
         <Bays update={this.update.bind(this)} />

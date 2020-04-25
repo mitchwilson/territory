@@ -19,7 +19,11 @@ div.chess-board > div {
   width: 75px;
 }
 
-div.chess-board > div.hilite {
+div.chess-board > div.white.hilite {
+  background-color:green;
+}
+
+div.chess-board > div.black.hilite {
   background-color:green;
 }
 
@@ -43,6 +47,17 @@ div#B3, div#D3, div#F3, div#H3,
 div#A2, div#C2, div#E2, div#G2,
 div#B1, div#D1, div#F1, div#H1 {
   background-color:white;
+}
+
+div#A1.hilite.black,
+div#C1.hilite.black,
+div#E1.hilite.black,
+div#G1.hilite.black {
+  background-color: #FF0000;
+}
+
+div#B1.hilite.black {
+  background-color: #800000;
 }
 
 img.chess-piece {
